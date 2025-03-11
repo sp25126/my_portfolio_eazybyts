@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saumya Patel - Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-hue: 262;
+            --primary-saturation: 89%;
+            --primary-lightness: 53%;
+            --bg-color: #f8fafc;
+            --text-color: #1e293b;
+            --border-color: #e2e8f0;
+            --card-bg: #ffffff;
+            --skill-opacity: 0.15;
+            --nav-blur: blur(12px);
+        }
+
+        [data-theme="dark"] {
+            --primary-lightness: 65%;
+            --primary-saturation: 85%;
+            --bg-color: #0f172a;
+            --text-color: #f1f5f9;
+            --border-color: #334155;
+            --card-bg: #1e293b;
+            --skill-opacity: 0.2;
+            --nav-blur: blur(16px);
+        }
+
+        body {
+            font-family: ui-sans-serif, system-ui, sans-serif;
+            background: var(--bg-color);
+            color: var(--text-color);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .dynamic-color {
+            color: hsl(
+                var(--primary-hue),
+                var(--primary-saturation),
+                var(--primary-lightness)
+            );
+        }
+
+        .color-palette {
+            position: fixed;
+            right: 1.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            z-index: 1000;
+        }
+
+        .color-dot {
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid var(--border-color);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .color-dot:hover {
+            transform: scale(1.15) rotate(15deg);
+        }
+
+        .skill-badge {
+            background: hsla(
+                var(--primary-hue),
+                var(--primary-saturation),
+                50%,
+                var(--skill-opacity)
+            );
+            color: hsl(
+                var(--primary-hue),
+                var(--primary-saturation),
+                var(--primary-lightness)
+            );
+            border-radius: 9999px;
+            padding: 0.5rem 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .project-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 1.25rem;
+            padding: 1.75rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        .project-card:hover {
+            transform: translateY(-0.5rem);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .theme-toggle {
+            background: hsl(
+                var(--primary-hue),
+                var(--primary-saturation),
+                var(--primary-lightness)
+            );
+            color: var(--card-bg);
+            transition: all 0.3s ease;
+        }
+
+        .nav-glass {
+            background: rgba(var(--card-bg-rgb), 0.65);
+            backdrop-filter: var(--nav-blur);
+            -webkit-backdrop-filter: var(--nav-blur);
+        }
+
+        .section-entrance {
+            opacity: 0;
+            transform: translateY(2rem);
+            transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .section-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Color Picker -->
+    <div class="color-palette">
+        <div class="color-dot" style="background: #8b5cf6" data-hue="262"></div>
+        <div class="color-dot" style="background: #3b82f6" data-hue="217"></div>
+        <div class="color-dot" style="background: #10b981" data-hue="160"></div>
+        <div class="color-dot" style="background: #f59e0b" data-hue="38"></div>
+        <div class="color-dot" style="background: #ef4444" data-hue="0"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="nav-glass fixed w-full z-50 shadow-sm">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="text-xl font-bold dynamic-color">Saumya Patel</div>
+            <div class="flex gap-4 items-center">
+                <button class="theme-toggle p-2.5 rounded-lg hover:opacity-90" onclick="toggleTheme()">
+                    <i id="theme-icon" class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-24 min-h-screen">
+        <div class="max-w-6xl mx-auto px-4 h-full flex items-center">
+            <div class="text-center md:text-left w-full space-y-6">
+                <h1 class="text-5xl md:text-6xl font-bold dynamic-color leading-tight">
+                    Hi, I'm <span class="bg-clip-text text-transparent bg-gradient-to-r from-[hsl(var(--primary-hue),var(--primary-saturation),var(--primary-lightness))] to-purple-500">Saumya Patel</span>
+                </h1>
+                <p class="text-xl opacity-75 max-w-2xl">
+                    Fresher Programmer | Web Developer & AI Enthusiast
+                </p>
+                <div class="flex gap-4 justify-center md:justify-start">
+                    <a href="#contact" class="px-8 py-3.5 rounded-xl hover:opacity-90 dynamic-color bg-opacity-100 font-medium transition-all" 
+                       style="background-color: hsl(var(--primary-hue), var(--primary-saturation), var(--primary-lightness)); color: var(--card-bg)">
+                        Contact Me
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 section-entrance" style="background: var(--card-bg)">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6">
+                    <h2 class="text-4xl font-bold mb-6">About Me</h2>
+                    <p class="text-lg opacity-80 leading-relaxed">
+                        Fresher programmer skilled in JavaScript, C, HTML, and CSS. Passionate about web/app development 
+                        and AI applications. Currently enhancing skills through practical projects and hackathons.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="skill-badge">JavaScript</span>
+                        <span class="skill-badge">HTML/CSS</span>
+                        <span class="skill-badge">UI/UX Design</span>
+                        <span class="skill-badge">AI Fundamentals</span>
+                    </div>
+                </div>
+                <div class="space-y-6">
+                    <div class="space-y-4">
+                        <h3 class="text-xl font-bold dynamic-color">Languages</h3>
+                        <ul class="list-disc pl-6 opacity-75">
+                            <li>English (Professional)</li>
+                            <li>Hindi (Native)</li>
+                            <li>Gujarati (Native)</li>
+                        </ul>
+                    </div>
+                    <div class="space-y-4">
+                        <h3 class="text-xl font-bold dynamic-color">Contact Details</h3>
+                        <ul class="space-y-2 opacity-75">
+                            <li><i class="fas fa-map-marker-alt mr-2"></i>Bopal, Ahmedabad, India</li>
+                            <li><i class="fas fa-phone mr-2"></i>08866553976</li>
+                            <li><i class="fas fa-envelope mr-2"></i>saumyavishwam@gmail.com</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education & Experience Section -->
+    <section id="education" class="py-24 section-entrance">
+        <div class="max-w-6xl mx-auto px-4">
+            <h2 class="text-4xl font-bold mb-12 text-center dynamic-color">Education & Experience</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="project-card">
+                    <h3 class="text-2xl font-bold mb-3 dynamic-color">B.Tech Computer Science</h3>
+                    <p class="opacity-75">Indus University, Bopal Ahmedabad</p>
+                    <p class="opacity-75">July 2024 - Present</p>
+                </div>
+                <div class="project-card">
+                    <h3 class="text-2xl font-bold mb-3 dynamic-color">Web Development Course</h3>
+                    <p class="opacity-75">ACMEGRADE</p>
+                    <p class="opacity-75">October 2024 - November 2024</p>
+                    <a href="https://photos.app.goo.gl/tjZdLvjJGHvRLFcM7" class="text-blue-400 hover:underline" target="_blank">View Certificate</a>
+                </div>
+                <div class="project-card">
+                    <h3 class="text-2xl font-bold mb-3 dynamic-color">AI Hackathon</h3>
+                    <p class="opacity-75">Lablab AI (Online/Onsite Barcelona)</p>
+                    <p class="opacity-75">March 2025 - Present</p>
+                    <a href="https://lablab.ai/u/@sp25126222" class="text-blue-400 hover:underline" target="_blank">View Profile</a>
+                </div>
+                <div class="project-card">
+                    <h3 class="text-2xl font-bold mb-3 dynamic-color">Web Developer Intern</h3>
+                    <p class="opacity-75">Eazybytes Web Solution</p>
+                    <p class="opacity-75">March 2025</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 section-entrance" style="background: var(--card-bg)">
+        <div class="max-w-3xl mx-auto px-4">
+            <div class="text-center space-y-2 mb-12">
+                <h2 class="text-4xl font-bold dynamic-color">Get in Touch</h2>
+                <div class="flex justify-center space-x-6 mt-4">
+                    <a href="https://github.com/sp25126" target="_blank" class="text-2xl hover:opacity-75 dynamic-color">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="https://linkedin.com/in/saumya-patel-2704652b6" target="_blank" class="text-2xl hover:opacity-75 dynamic-color">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                </div>
+            </div>
+            <form class="space-y-6">
+                <div class="grid md:grid-cols-2 gap-6">
+                    <input type="text" placeholder="Name" class="w-full p-3.5 rounded-xl border border-opacity-20 focus:border-opacity-40 transition-all" style="background: var(--bg-color); border-color: var(--primary-color)">
+                    <input type="email" placeholder="Email" class="w-full p-3.5 rounded-xl border border-opacity-20 focus:border-opacity-40 transition-all" style="background: var(--bg-color); border-color: var(--primary-color)">
+                </div>
+                <textarea rows="5" placeholder="Your message..." class="w-full p-3.5 rounded-xl border border-opacity-20 focus:border-opacity-40 transition-all" style="background: var(--bg-color); border-color: var(--primary-color)"></textarea>
+                <button class="w-full py-4 rounded-xl hover:opacity-90 dynamic-color font-medium transition-all" 
+                        style="background-color: hsl(var(--primary-hue), var(--primary-saturation), var(--primary-lightness)); color: var(--card-bg)">
+                    Send Message
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <script>
+        // Theme Management
+        const setTheme = (isDark) => {
+            document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+            document.documentElement.style.setProperty('--primary-saturation', isDark ? '85%' : '89%');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        };
+
+        // Color Management
+        const setColor = (hue) => {
+            document.documentElement.style.setProperty('--primary-hue', hue);
+            localStorage.setItem('themeHue', hue);
+        };
+
+        // Intersection Observer
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    entry.target.classList.add('section-visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        // Initialize
+        document.querySelectorAll('.section-entrance').forEach(section => observer.observe(section));
+        document.querySelectorAll('.color-dot').forEach(dot => 
+            dot.addEventListener('click', () => setColor(dot.dataset.hue))
+        );
+
+        // Theme Toggle
+        const toggleTheme = () => {
+            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+            const themeIcon = document.getElementById('theme-icon');
+            
+            setTheme(!isDark);
+            themeIcon.classList.toggle('fa-moon', !isDark);
+            themeIcon.classList.toggle('fa-sun', isDark);
+        };
+
+        // Load Preferences
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        const savedHue = localStorage.getItem('themeHue') || 262;
+        setTheme(savedTheme === 'dark');
+        setColor(savedHue);
+        document.getElementById('theme-icon').classList.add(savedTheme === 'dark' ? 'fa-sun' : 'fa-moon');
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
